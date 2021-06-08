@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  font-family: "Fira Sans", sans-serif;
+}
+
+.tasker {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: white;
+  background-color: #69dcf0;
+  width: 45%;
+  height: 35vh;
+  border-radius: 10px;
+  padding: 0px 5px;
+  margin-left: 5px;
+}
+
+.tasker-header {
+  width: 100%;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.tasker-body {
+  width: 100%;
+  color: white;
+  padding: 10px;
+}
+
+.fa-trasher {
+  background-color: #99e1ee;
+  border-radius: 10px;
+}
+
+
+#tasks {
+  width: 100%;
+  color: white;
+  padding: 5px;
+  background-color: #99e1ee;
+  border-radius: 10px;
+}
