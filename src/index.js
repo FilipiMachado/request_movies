@@ -1,49 +1,59 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Axios from "axios"
+import { Button, Input, Card } from "antd"
+
+import "antd/dist/antd.css"
+
+const { Meta } = Card
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      message: "Mensagem Inicial!!",
-      counter: 0,
-      oldCounter: null
+      films: []
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.counter !== prevState.counter) {
-      this.setState({
-        oldCounter: prevState.counter
-      })
-    }
-  }
+  componentDidUpdate(prevProps, prevState) { }
 
-  componentDidMount() {
-    setInterval(() => {
-      this.setState({
-        counter: this.state.counter + 1
-      });
-    }, 3000);
+  componentDidMount() { }
+
+  async getFilms(filmName) {
+    const { data } = await Axios.get("http://omdbapi.com/?apiKey=58d5a1f9&t=" + filmName);
+
+    console.log(data)
+
+    this.setState({
+      films: [
+        ...this.state.films,
+        data
+      ]
+    })
   }
 
   render() {
     return (
       <div>
-        <input onChange={(event) => {
-          this.setState({
-            message: event.target.value
-          });
-        }} />
+        <h1>FILM LIST:</h1>
+        <Input style={{ width: 200 }} id="film-input" />
 
-        <h1>{this.state.message}</h1>
+        <Button type="primary" onClick={() => {
+          const filmName = document.getElementById('film-input').value;
 
-        <h1>{this.state.counter}</h1>
+          this.getFilms(filmName);
+        }}>Add Film</Button>
 
-        <h1>Valor Antigo: {this.state.oldCounter}</h1>
-
-        <h1>ISSO NÃO MUDA!</h1>
+        {this.state.films.map(film => (
+          <Card
+            hoverable
+            style={{ width: 200 }}
+            cover={<img src={film.Poster} />}
+          >
+            <Meta title={film.Title} description={film.Actors} />
+          </Card>
+        ))}
       </div>
     )
   }
