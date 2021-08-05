@@ -36,14 +36,14 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>FILM LIST:</h1>
+        <h1>Movies List:</h1>
         <Input style={{ width: 200 }} id="film-input" />
 
         <Button type="primary" onClick={() => {
           const filmName = document.getElementById('film-input').value;
 
           this.getFilms(filmName);
-        }}>Add Film</Button>
+        }}>Add Movie</Button>
 
         {this.state.films.map(film => (
           <Card
